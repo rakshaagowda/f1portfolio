@@ -1,16 +1,89 @@
-# React + Vite
+<h1 align="center">
+<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=35&duration=3000&color=E50914&center=true&vCenter=true&width=900&lines=Netflix+Style+Developer+Portfolio;Interactive+Project+Showcase;Modern+UI+Inspired+by+Netflix;Built+with+React+and+Tailwind"/>
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
 
-Currently, two official plugins are available:
+🎬 **A Netflix-style developer portfolio showcasing projects with cinematic UI and smooth animations.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+</p>
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 🌐 Live Demo
 
-## Expanding the ESLint configuration
+🚀 https://rakshaportfolio-rosy.vercel.app
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+# 📸 Preview
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/placeholder/netflix-portfolio-preview.png"/>
+</p>
+
+---
+
+# ✨ Features
+
+🎬 Netflix style UI layout
+🎞 Horizontal scrolling project cards
+⚡ Smooth animations and transitions
+📱 Fully responsive design
+🚀 Fast performance
+
+---
+
+# 🛠 Tech Stack
+
+<p align="center">
+
+<img src="https://skillicons.dev/icons?i=react,typescript,tailwind,nodejs,vercel"/>
+
+</p>
+
+---
+
+# 🚀 Installation
+
+```bash
+git clone https://github.com/rakshaagowda/rakshaportfolio.git
+
+cd rakshaportfolio
+
+npm install
+
+npm run dev
+```
+
+---
+
+# 📂 Project Structure
+
+```
+src
+ ├── components
+ ├── pages
+ ├── assets
+ ├── styles
+ └── App.tsx
+```
+
+---
+
+# 💡 Inspiration
+
+Inspired by the **Netflix streaming UI** to create an immersive developer portfolio.
+
+---
+
+# 👩‍💻 Author
+
+**Raksha B R**
+
+LinkedIn
+https://www.linkedin.com/in/raksha-b-r-447490292
+
+---
+
+⭐ If you like this project, give it a star!
