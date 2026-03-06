@@ -16,11 +16,6 @@
 
 ---
 
-# 📸 Preview
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/placeholder/netflix-portfolio-preview.png"/>
-</p>
 
 ---
 
