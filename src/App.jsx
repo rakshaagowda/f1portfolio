@@ -34,6 +34,7 @@ function App() {
   const cursorRef = useRef(null);
   const ringRef = useRef(null);
   const [lights, setLights] = useState([false, false, false, false, false]);
+  const [selectedProject, setSelectedProject] = useState(null);
   const { scrollYProgress } = useScroll();
 
   // F1 Car Tracker driving down the line based on scroll
@@ -105,6 +106,15 @@ function App() {
 
     sequence();
     return () => { active = false; };
+  }, []);
+
+  // Escape key to close project detail modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedProject(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   // RPM Bar Width based on Scroll
@@ -231,8 +241,7 @@ function App() {
                 </div>
               </div>
               <div className="driver-bio">
-                {vision} <br /><br />
-                Just like a finely tuned Formula 1 car, I believe software requires a perfect balance of speed, aerodynamics (clean UI), and exceptional engineering (robust backend) to win the race.
+                {vision}
               </div>
             </div>
           </div>
@@ -277,7 +286,12 @@ function App() {
 
           <div className="gp-calendar">
             {projectsData.map((proj, idx) => (
-              <div className="gp-card rv" key={proj.id}>
+              <div
+                className="gp-card rv"
+                key={proj.id}
+                onClick={() => setSelectedProject(proj)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="gp-date">
                   <div className="gp-idx">0{idx + 1}</div>
                   <div className="gp-year">SEASON {proj.year}</div>
@@ -379,6 +393,128 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* ── PROJECT DETAIL MODAL (F1 Telemetry Card) ── */}
+      {selectedProject && (
+        <div className="gp-modal-overlay" onClick={() => setSelectedProject(null)}>
+          <div className="gp-modal-card" onClick={(e) => e.stopPropagation()}>
+            <button className="gp-modal-close" onClick={() => setSelectedProject(null)} aria-label="Close modal">
+              &times;
+            </button>
+            <div className="gp-modal-header">
+              <div className="gp-modal-meta">
+                <span className="gp-modal-tag">TELEMETRY DATA</span>
+                <span className="gp-modal-year">SEASON {selectedProject.year}</span>
+              </div>
+              <h3 className="gp-modal-title">{selectedProject.title}</h3>
+              <p className="gp-modal-subtitle">{selectedProject.subtitle}</p>
+            </div>
+            <div className="gp-modal-content">
+              <div className="gp-modal-info-grid">
+                <div className="gp-modal-stat-box">
+                  <span className="gp-stat-label">RATING</span>
+                  <span className="gp-stat-val text-green">{selectedProject.rating}</span>
+                </div>
+                <div className="gp-modal-stat-box">
+                  <span className="gp-stat-label">DURATION</span>
+                  <span className="gp-stat-val">{selectedProject.duration}</span>
+                </div>
+              </div>
+
+              <div className="gp-modal-main">
+                <div className="gp-modal-desc-box">
+                  <h4>Detailed Telemetry Log</h4>
+                  <p>{selectedProject.description}</p>
+                </div>
+
+                {/* Machine Learning Pipeline */}
+                {selectedProject.mlOverview && (
+                  <div className="gp-modal-ml-box">
+                    <h4>Machine Learning Pipeline</h4>
+                    <p className="gp-modal-ml-intro">{selectedProject.mlOverview.methodology}</p>
+                    <div className="gp-modal-ml-engines">
+                      {selectedProject.mlOverview.engines.map((eng, i) => (
+                        <div key={i} className="gp-modal-ml-engine-card">
+                          <h5>{eng.name}</h5>
+                          <p>{eng.detail}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* System Architecture Details */}
+                {selectedProject.architectureDetails && (
+                  <div className="gp-modal-arch-box">
+                    <h4>System Architecture & Flow</h4>
+                    <p className="gp-modal-arch-intro">{selectedProject.architectureDetails.flowDescription}</p>
+                    <div className="gp-modal-arch-steps">
+                      {selectedProject.architectureDetails.steps.map((step, i) => (
+                        <div key={i} className="gp-modal-arch-step-card">
+                          <span className="step-num">0{i + 1}</span>
+                          <div>
+                            <h6>{step.title}</h6>
+                            <p>{step.detail}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Key System Features */}
+                {selectedProject.keyFeatures && (
+                  <div className="gp-modal-features-box">
+                    <h4>Key System Specifications</h4>
+                    <ul className="gp-modal-features-list">
+                      {selectedProject.keyFeatures.map((feat, i) => (
+                        <li key={i}>
+                          <strong>{feat.name}:</strong> {feat.detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div className="gp-modal-specs">
+                  <div className="gp-spec-item">
+                    <strong className="text-red">Telemetry Issue:</strong> {selectedProject.problem}
+                  </div>
+                  <div className="gp-spec-item">
+                    <strong className="text-red">Constructor Fix:</strong> {selectedProject.solution}
+                  </div>
+                  <div className="gp-spec-item">
+                    <strong className="text-red">Car Architecture:</strong> {selectedProject.architecture}
+                  </div>
+                </div>
+              </div>
+
+              <div className="gp-modal-footer">
+                <div className="gp-modal-tech-list">
+                  {selectedProject.tags.map(t => (
+                    <span className="gp-modal-tech-tag" key={t}>
+                      {getTechIcon(t)} {t}
+                    </span>
+                  ))}
+                </div>
+                {selectedProject.githubUrl && (
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-race gp-modal-github-btn"
+                  >
+                    <span>
+                      <Github size={16} style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle' }} />
+                      Paddock Code (GitHub)
+                    </span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer style={{ textAlign: 'center', padding: '40px', background: '#050505', borderTop: '1px solid #222', fontFamily: 'Orbitron', fontSize: '12px', color: '#666', letterSpacing: '2px' }}>
         © RAKSHA B R. POWERED BY REACT & VITE. ALL SECONDS COUNT.

@@ -1056,3 +1056,441 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── PROJECT DETAIL MODAL ── */
+.gp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.gp-modal-card {
+  background: var(--dark-carbon);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 8px solid var(--f1-red);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 750px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(225, 6, 0, 0.1);
+  animation: slideUp 0.4s var(--spring);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom scrollbar for modal card */
+.gp-modal-card::-webkit-scrollbar {
+  width: 6px;
+}
+.gp-modal-card::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+.gp-modal-card::-webkit-scrollbar-thumb {
+  background: var(--f1-light-grey);
+  border-radius: 3px;
+}
+.gp-modal-card::-webkit-scrollbar-thumb:hover {
+  background: var(--f1-red);
+}
+
+.gp-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: transparent;
+  border: none;
+  color: var(--f1-grey);
+  font-size: 36px;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  z-index: 10;
+  line-height: 1;
+}
+
+.gp-modal-close:hover {
+  color: var(--f1-red);
+  transform: rotate(90deg);
+}
+
+.gp-modal-header {
+  padding: 40px 40px 20px 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gp-modal-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.gp-modal-tag {
+  font-family: 'Orbitron';
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--f1-red);
+  letter-spacing: 2px;
+  background: rgba(225, 6, 0, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.gp-modal-year {
+  font-family: 'Orbitron';
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--f1-grey);
+  letter-spacing: 1px;
+}
+
+.gp-modal-title {
+  font-family: 'Montserrat';
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  color: var(--f1-white);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.gp-modal-subtitle {
+  font-size: 14px;
+  color: var(--f1-grey);
+  line-height: 1.5;
+}
+
+.gp-modal-content {
+  padding: 0 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.gp-modal-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.gp-modal-stat-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 3px solid var(--f1-grey);
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gp-modal-stat-box:first-child {
+  border-left-color: #00ff00; /* Green for rating match */
+}
+
+.gp-stat-label {
+  font-family: 'Orbitron';
+  font-size: 9px;
+  color: var(--f1-grey);
+  letter-spacing: 1px;
+}
+
+.gp-stat-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--f1-white);
+}
+
+.text-green {
+  color: #00ff00 !important;
+}
+
+.text-red {
+  color: var(--f1-red) !important;
+}
+
+.gp-modal-main {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.gp-modal-desc-box h4 {
+  font-family: 'Orbitron';
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--f1-red);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.gp-modal-desc-box p {
+  font-size: 15px;
+  color: var(--f1-grey);
+  line-height: 1.7;
+}
+
+.gp-modal-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.gp-spec-item {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 2px solid var(--f1-light-grey);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--f1-white);
+}
+
+.gp-spec-item strong {
+  font-family: 'Orbitron';
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.gp-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.gp-modal-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gp-modal-tech-tag {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: 'Montserrat';
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--f1-grey);
+}
+
+.gp-modal-github-btn {
+  transform: skewX(-10deg) !important;
+  font-size: 13px !important;
+  padding: 12px 24px !important;
+}
+
+.gp-modal-github-btn span {
+  transform: skewX(10deg) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media(max-width: 768px) {
+  .gp-modal-card {
+    border-left: none;
+    border-top: 6px solid var(--f1-red);
+  }
+  
+  .gp-modal-header {
+    padding: 30px 20px 15px 20px;
+  }
+  
+  .gp-modal-content {
+    padding: 0 20px 30px 20px;
+    gap: 20px;
+  }
+  
+  .gp-modal-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .gp-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .gp-modal-github-btn {
+    text-align: center;
+  }
+}
+
+/* ── UPGRADED PROJECT SPECIFICATION STYLING ── */
+.gp-modal-ml-box, .gp-modal-arch-box, .gp-modal-features-box {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 10px;
+}
+
+.gp-modal-ml-box h4, .gp-modal-arch-box h4, .gp-modal-features-box h4 {
+  font-family: 'Orbitron';
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--f1-red);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(225, 6, 0, 0.2);
+  padding-bottom: 8px;
+}
+
+.gp-modal-ml-intro, .gp-modal-arch-intro {
+  font-size: 13.5px;
+  color: var(--f1-grey);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.gp-modal-ml-engines {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.gp-modal-ml-engine-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 3px solid var(--f1-red);
+  padding: 16px;
+  border-radius: 6px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.gp-modal-ml-engine-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(225, 6, 0, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.gp-modal-ml-engine-card h5 {
+  font-family: 'Montserrat';
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--f1-white);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.gp-modal-ml-engine-card p {
+  font-size: 12px;
+  color: var(--f1-grey);
+  line-height: 1.55;
+}
+
+/* System Architecture Steps */
+.gp-modal-arch-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gp-modal-arch-step-card {
+  display: flex;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 3px solid var(--f1-light-grey);
+  align-items: flex-start;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.gp-modal-arch-step-card:hover {
+  border-left-color: var(--f1-red);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.gp-modal-arch-step-card .step-num {
+  font-family: 'Orbitron';
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--f1-red);
+  opacity: 0.8;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.gp-modal-arch-step-card h6 {
+  font-family: 'Montserrat';
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--f1-white);
+  margin-bottom: 4px;
+}
+
+.gp-modal-arch-step-card p {
+  font-size: 12px;
+  color: var(--f1-grey);
+  line-height: 1.55;
+}
+
+/* Key Features list */
+.gp-modal-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gp-modal-features-list li {
+  font-size: 13px;
+  color: var(--f1-grey);
+  line-height: 1.6;
+  position: relative;
+  padding-left: 20px;
+}
+
+.gp-modal-features-list li::before {
+  content: "■";
+  color: var(--f1-red);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 9px;
+}
+
+.gp-modal-features-list li strong {
+  color: var(--f1-white);
+  font-family: 'Montserrat';
+  font-weight: 700;
+}
